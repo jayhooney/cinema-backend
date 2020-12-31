@@ -1,5 +1,5 @@
 import { IsNumber, IsString } from 'class-validator';
-
+import { Type } from 'class-transformer';
 export class AddMovieDTO {
   @IsString()
   readonly openingDate: string;
@@ -13,4 +13,10 @@ export class AddMovieDTO {
   readonly description: string;
   @IsString()
   readonly modifier: string;
+}
+
+export class MovieListDTO {
+  @IsNumber()
+  @Type(() => Number)
+  readonly page: number;
 }

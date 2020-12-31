@@ -17,11 +17,13 @@ export class MovieService {
     return;
   }
 
-  public movieList(res: Response) {
-    const query = `select seq,opening_date,title,grade,still_shots,description,modifier,update_dt from movie_tb;`;
+  public movieList(movieListData: MovieDTO.MovieListDTO, res: Response) {
+    this.logger.debug(movieListData);
+    const query = `select seq,opening_date,title,grade,still_shots,description,modifier,update_dt from movie_tb limit 0,?;`;
+    const queryItems: any[] = Object.values(movieListData);
     const db: Database = new Database();
-    db.ExecuteQuery(query, [], (err, results, fileds) => {
-      res;
+    db.ExecuteQuery(query, queryItems, (err, results, fileds) => {
+      res.send(results);
     });
     return;
   }
