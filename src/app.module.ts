@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { MovieService } from './movie/movie.service';
+import { MovieController } from './movie/movie.controller';
 
 @Module({
   imports: [
@@ -9,7 +11,7 @@ import { AppService } from './app.service';
       envFilePath: '.env',
     }),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, MovieController],
+  providers: [AppService, MovieService],
 })
 export class AppModule {}
