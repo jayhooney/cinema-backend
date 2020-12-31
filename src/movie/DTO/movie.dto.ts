@@ -13,6 +13,4 @@ export class AddMovieDTO {
   readonly description: string;
   @IsString()
   readonly modifier: string;
-  @IsString()
-  readonly update_dt: string;
 }

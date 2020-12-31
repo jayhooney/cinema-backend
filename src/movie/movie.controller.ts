@@ -1,19 +1,23 @@
-import { Controller, Body, Post, Get, Delete, Put } from '@nestjs/common';
+import { Controller, Body, Post, Get, Delete, Put, Res } from '@nestjs/common';
 import { MovieService } from './movie.service';
 import * as MovieDTO from './DTO/movie.dto';
+import { Response, response } from 'express';
 
 @Controller('movie')
 export class MovieController {
   constructor(private movieService: MovieService) {}
 
   @Post('add')
-  async addMovie(@Body() addMovieData: MovieDTO.AddMovieDTO): Promise<void> {
-    this.movieService.addMovie(addMovieData);
+  async addMovie(
+    @Body() addMovieData: MovieDTO.AddMovieDTO,
+    @Res() res: Response,
+  ): Promise<void> {
+    this.movieService.addMovie(addMovieData, res);
   }
 
   @Get('list')
-  async movieList(): Promise<void> {
-    this.movieService.movieList();
+  async movieList(@Res() res: Response): Promise<void> {
+    this.movieService.movieList(res);
   }
 
   @Delete('delete')
