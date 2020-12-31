@@ -4,10 +4,11 @@ import {
   Post,
   Get,
   Delete,
-  Put,
   Res,
   Query,
   Logger,
+  Patch,
+  Param,
 } from '@nestjs/common';
 import { MovieService } from './movie.service';
 import * as MovieDTO from './DTO/movie.dto';
@@ -18,7 +19,7 @@ export class MovieController {
   private readonly logger = new Logger(MovieController.name);
   constructor(private movieService: MovieService) {}
 
-  @Post('add')
+  @Post()
   async addMovie(
     @Body() addMovieData: MovieDTO.AddMovieDTO,
     @Res() res: Response,
@@ -26,7 +27,7 @@ export class MovieController {
     this.movieService.addMovie(addMovieData, res);
   }
 
-  @Get('list')
+  @Get()
   async movieList(
     @Query() movieListDTO: MovieDTO.MovieListDTO,
     @Res() res: Response,
@@ -35,13 +36,19 @@ export class MovieController {
     this.movieService.movieList(movieListDTO, res);
   }
 
-  @Delete('delete')
-  async deleteMovie(): Promise<void> {
-    this.movieService.deleteMovie();
+  @Delete(':id')
+  async deleteMovie(
+    @Param('id') id: number,
+    @Res() res: Response,
+  ): Promise<void> {
+    this.movieService.deleteMovie(id, res);
   }
 
-  @Put('update')
-  async updateMovie(): Promise<void> {
-    this.movieService.updateMovie();
+  @Patch(':id')
+  async updateMovie(
+    @Param('id') id: number,
+    @Res() res: Response,
+  ): Promise<void> {
+    this.movieService.updateMovie(id, res);
   }
 }
