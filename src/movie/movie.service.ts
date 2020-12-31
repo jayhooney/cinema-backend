@@ -21,7 +21,7 @@ export class MovieService {
     const query = `select seq,opening_date,title,grade,still_shots,description,modifier,update_dt from movie_tb;`;
     const db: Database = new Database();
     db.ExecuteQuery(query, [], (err, results, fileds) => {
-      res;
+      res.send(results);
     });
     return;
   }
