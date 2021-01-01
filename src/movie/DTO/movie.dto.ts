@@ -8,7 +8,7 @@ export class AddMovieDTO {
   @IsNumber()
   readonly grade: number;
   @IsString()
-  readonly still_shots: string;
+  readonly stillShots: string;
   @IsString()
   readonly description: string;
   @IsString()
