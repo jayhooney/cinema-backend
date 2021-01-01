@@ -37,9 +37,15 @@ export class MovieService {
     return;
   }
 
-  public updateMovie(id: number, res: Response) {
-    const queryItems: any[] = [id];
-    const query = `update movie_tb set title = '' where seq = ?;`;
+  public updateMovie(
+    id: number,
+    updateMovieDTO: MovieDTO.UpdateMovieDTO,
+    res: Response,
+  ) {
+    const queryItems: any[] = Object.values(updateMovieDTO);
+    queryItems.push(id);
+    this.logger.debug(queryItems);
+    const query = `update movie_tb set opening_date=?, title=?, grade=?, still_shots=?, description=?, modifier=?, update_dt=NOW() where seq = ?;`;
     const db: Database = new Database();
     db.ExecuteQuery(query, queryItems, (err, results, fileds) => {
       res.send(results);

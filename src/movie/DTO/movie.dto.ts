@@ -20,3 +20,18 @@ export class MovieListDTO {
   @Type(() => Number)
   readonly page: number;
 }
+
+export class UpdateMovieDTO {
+  @IsString()
+  readonly openingDate: string;
+  @IsString()
+  readonly title: string;
+  @IsNumber()
+  readonly grade: number;
+  @IsString()
+  readonly stillShots: string;
+  @IsString()
+  readonly description: string;
+  @IsString()
+  readonly modifier: string;
+}

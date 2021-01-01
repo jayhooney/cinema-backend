@@ -46,9 +46,10 @@ export class MovieController {
 
   @Patch(':id')
   async updateMovie(
-    @Param('id') id: number,
+    @Param('id') seq: number,
+    @Body() updateMovieDTO: MovieDTO.UpdateMovieDTO,
     @Res() res: Response,
   ): Promise<void> {
-    this.movieService.updateMovie(id, res);
+    this.movieService.updateMovie(seq, updateMovieDTO, res);
   }
 }
