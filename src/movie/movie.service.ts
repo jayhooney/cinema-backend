@@ -27,8 +27,8 @@ export class MovieService {
     return;
   }
 
-  public deleteMovie(id: number, res: Response) {
-    const queryItems: any[] = [id];
+  public deleteMovie(seq: number, res: Response) {
+    const queryItems: any[] = [seq];
     const query = `delete from movie_tb where seq = ?;`;
     const db: Database = new Database();
     db.ExecuteQuery(query, queryItems, (err, results, fileds) => {

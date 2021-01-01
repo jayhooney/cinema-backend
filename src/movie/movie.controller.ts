@@ -36,12 +36,12 @@ export class MovieController {
     this.movieService.movieList(movieListDTO, res);
   }
 
-  @Delete(':id')
+  @Delete(':seq')
   async deleteMovie(
-    @Param('id') id: number,
+    @Param('seq') seq: number,
     @Res() res: Response,
   ): Promise<void> {
-    this.movieService.deleteMovie(id, res);
+    this.movieService.deleteMovie(seq, res);
   }
 
   @Patch(':id')
