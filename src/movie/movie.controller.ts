@@ -6,7 +6,6 @@ import {
   Delete,
   Res,
   Query,
-  Logger,
   Patch,
   Param,
 } from '@nestjs/common';
@@ -16,7 +15,6 @@ import { Response } from 'express';
 
 @Controller('movie')
 export class MovieController {
-  private readonly logger = new Logger(MovieController.name);
   constructor(private movieService: MovieService) {}
 
   @Post()
@@ -32,7 +30,6 @@ export class MovieController {
     @Query() movieListDTO: MovieDTO.MovieListDTO,
     @Res() res: Response,
   ): Promise<void> {
-    this.logger.log(movieListDTO);
     this.movieService.movieList(movieListDTO, res);
   }
 

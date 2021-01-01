@@ -18,7 +18,7 @@ export class AddMovieDTO {
 export class MovieListDTO {
   @IsNumber()
   @Type(() => Number)
-  readonly page: number;
+  page: number;
 }
 
 export class UpdateMovieDTO {
