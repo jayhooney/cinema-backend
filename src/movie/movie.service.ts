@@ -6,13 +6,17 @@ import { Response } from 'express';
 @Injectable()
 export class MovieService {
   private readonly logger = new Logger(MovieService.name);
+
   public addMovie(addMovieData: MovieDTO.AddMovieDTO, res: Response) {
     const queryItems: any[] = Object.values(addMovieData);
     const query = `insert into movie_tb (opening_date, title, grade, still_shots, description, modifier, update_dt) values (?,?,?,?,?,?,NOW());`;
-    const db: Database = new Database();
-    db.ExecuteQuery(query, queryItems, (err, results, fields) => {
-      res.send(results);
-    });
+    Database.getInstance().ExecuteQuery(
+      query,
+      queryItems,
+      (err, results, fields) => {
+        res.send(results);
+      },
+    );
     return;
   }
 
@@ -20,20 +24,26 @@ export class MovieService {
     this.logger.debug(movieListData);
     const query = `select seq,opening_date,title,grade,still_shots,description,modifier,update_dt from movie_tb limit 0,?;`;
     const queryItems: any[] = Object.values(movieListData);
-    const db: Database = new Database();
-    db.ExecuteQuery(query, queryItems, (err, results, fileds) => {
-      res.send(results);
-    });
+    Database.getInstance().ExecuteQuery(
+      query,
+      queryItems,
+      (err, results, fileds) => {
+        res.send(results);
+      },
+    );
     return;
   }
 
   public deleteMovie(seq: number, res: Response) {
     const queryItems: any[] = [seq];
     const query = `delete from movie_tb where seq = ?;`;
-    const db: Database = new Database();
-    db.ExecuteQuery(query, queryItems, (err, results, fileds) => {
-      res.send(results);
-    });
+    Database.getInstance().ExecuteQuery(
+      query,
+      queryItems,
+      (err, results, fileds) => {
+        res.send(results);
+      },
+    );
     return;
   }
 
@@ -46,10 +56,14 @@ export class MovieService {
     queryItems.push(id);
     this.logger.debug(queryItems);
     const query = `update movie_tb set opening_date=?, title=?, grade=?, still_shots=?, description=?, modifier=?, update_dt=NOW() where seq = ?;`;
-    const db: Database = new Database();
-    db.ExecuteQuery(query, queryItems, (err, results, fileds) => {
-      res.send(results);
-    });
+
+    Database.getInstance().ExecuteQuery(
+      query,
+      queryItems,
+      (err, results, fileds) => {
+        res.send(results);
+      },
+    );
     return;
   }
 }

@@ -2,6 +2,18 @@ import { createPool, Pool, PoolConfig, queryCallback, Query } from 'mysql';
 import { Logger } from '@nestjs/common';
 
 export class Database {
+  //#region Singleton Pattern
+  private static instance: Database;
+
+  public static getInstance(): Database {
+    if (!Database.instance) {
+      Database.instance = new Database();
+    }
+
+    return Database.instance;
+  }
+  //#endregion
+
   private readonly logger = new Logger(Database.name);
 
   private dbConf: PoolConfig = {
