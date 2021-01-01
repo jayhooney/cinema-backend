@@ -21,9 +21,9 @@ export class MovieService {
   }
 
   public movieList(movieListData: MovieDTO.MovieListDTO, res: Response) {
-    this.logger.debug(movieListData);
-    const query = `select seq,opening_date,title,grade,still_shots,description,modifier,update_dt from movie_tb limit 0,?;`;
+    movieListData.page = (movieListData.page - 1) * 10;
     const queryItems: any[] = Object.values(movieListData);
+    const query = `select seq,opening_date,title,grade,still_shots,description,modifier,update_dt from movie_tb limit ?,10;`;
     Database.getInstance().ExecuteQuery(
       query,
       queryItems,
@@ -54,7 +54,6 @@ export class MovieService {
   ) {
     const queryItems: any[] = Object.values(updateMovieDTO);
     queryItems.push(id);
-    this.logger.debug(queryItems);
     const query = `update movie_tb set opening_date=?, title=?, grade=?, still_shots=?, description=?, modifier=?, update_dt=NOW() where seq = ?;`;
 
     Database.getInstance().ExecuteQuery(
