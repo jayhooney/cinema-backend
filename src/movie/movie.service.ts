@@ -20,9 +20,8 @@ export class MovieService {
     return;
   }
 
-  public movieList(movieListData: MovieDTO.MovieListDTO, res: Response) {
-    movieListData.page = (movieListData.page - 1) * 10;
-    const queryItems: any[] = Object.values(movieListData);
+  public movieList(res: Response) {
+    const queryItems: any[] = [];
     const query = `select seq as seq,date_format(opening_date,'%Y-%m-%d') as openingDate,title as title,grade as grade,still_shots as stillShots,description as description from movie_tb;`;
     Database.getInstance().ExecuteQuery(
       query,
