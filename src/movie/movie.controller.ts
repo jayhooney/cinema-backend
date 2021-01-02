@@ -26,11 +26,8 @@ export class MovieController {
   }
 
   @Get()
-  async movieList(
-    @Query() movieListDTO: MovieDTO.MovieListDTO,
-    @Res() res: Response,
-  ): Promise<void> {
-    this.movieService.movieList(movieListDTO, res);
+  async movieList(@Res() res: Response): Promise<void> {
+    this.movieService.movieList(res);
   }
 
   @Delete(':seq')
