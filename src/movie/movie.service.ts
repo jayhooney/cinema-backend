@@ -9,7 +9,7 @@ export class MovieService {
 
   public addMovie(addMovieData: MovieDTO.AddMovieDTO, res: Response) {
     const queryItems: any[] = Object.values(addMovieData);
-    const query = `insert into movie_tb (opening_date, title, grade, still_shots, description, modifier, update_dt) values (?,?,?,?,?,?,NOW());`;
+    const query = `insert into movie_tb (opening_date, title, grade, still_shots, description, update_dt) values (?,?,?,?,?,NOW());`;
     Database.getInstance().ExecuteQuery(
       query,
       queryItems,
@@ -23,7 +23,7 @@ export class MovieService {
   public movieList(movieListData: MovieDTO.MovieListDTO, res: Response) {
     movieListData.page = (movieListData.page - 1) * 10;
     const queryItems: any[] = Object.values(movieListData);
-    const query = `select seq,opening_date,title,grade,still_shots,description,modifier,update_dt from movie_tb limit ?,10;`;
+    const query = `select seq,opening_date,title,grade,still_shots,description,update_dt from movie_tb limit ?,10;`;
     Database.getInstance().ExecuteQuery(
       query,
       queryItems,
@@ -54,7 +54,7 @@ export class MovieService {
   ) {
     const queryItems: any[] = Object.values(updateMovieDTO);
     queryItems.push(id);
-    const query = `update movie_tb set opening_date=?, title=?, grade=?, still_shots=?, description=?, modifier=?, update_dt=NOW() where seq = ?;`;
+    const query = `update movie_tb set opening_date=?, title=?, grade=?, still_shots=?, description=?, update_dt=NOW() where seq = ?;`;
 
     Database.getInstance().ExecuteQuery(
       query,
